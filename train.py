@@ -41,9 +41,12 @@ def main():
 
     if torch.cuda.is_available():
         torch.backends.cudnn.benchmark = True
-
+    if args.distributed:
+        torch.cuda.set_device(args.local_rank)
+        torch.distributed.init_process_group(backend="nccl", init_method="env://")
+        synchronize()
+        
     print('finish main')
 
 if __name__ == '__main__':
     main()
-    
