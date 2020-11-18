@@ -1,0 +1,15 @@
+MODEL:
+  NUM_CLASSES: 7 #NUM_CLASSES: 21 **modify-ganyongdong-2020.10.5
+INPUT:
+  IMAGE_SIZE: 300
+DATASETS:
+  TRAIN: ("voc_2007_trainval", ) ## TRAIN: ("voc_2007_trainval", "voc_2012_trainval") **modify-ganyongdong-2020.10.5
+  TEST: ("voc_2007_test", )
+SOLVER:
+  MAX_ITER: 60000
+  LR_STEPS: [30000, 50000]
+  GAMMA: 0.1
+  BATCH_SIZE: 32
+  LR: 5e-4
+
+OUTPUT_DIR: 'outputs/vgg_ssd300_voc0712'
