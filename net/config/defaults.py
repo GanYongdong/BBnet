@@ -3,7 +3,7 @@ from yacs.config import CfgNode as CN
 _C = CN()
 
 _C.MODEL = CN()
-_C.MODEL.META_ARCHITECTURE = 'Detector'
+_C.MODEL.META_ARCHITECTURE = 'ssdNetDetector'
 _C.MODEL.DEVICE = 'cuda'
 _C.MODEL.THRESHOLD = 0.5
 _C.MODEL.NUM_CLASSES = 7 # _C.MODEL.NUM_CLASSES = 5 **modify-ganyongdong-2020.10.5

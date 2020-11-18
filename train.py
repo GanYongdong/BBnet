@@ -1,4 +1,5 @@
 import argparse
+import logging
 import os
 
 import torch
@@ -10,6 +11,12 @@ from net.utils.dist_util import synchronize
 from net.config import cfg
 from net.utils.misc import mkdir
 from net.utils.logger import setup_logger
+
+def train(cfg, args):
+    logger = logging.getLogger('NET.trainer')
+    model = build_detection_model(cfg)
+    
+    print('train finish')
 
 def main():
     print('hello main')
@@ -56,6 +63,16 @@ def main():
     logger.info(args)
 
     logger.info("Loaded configuration file {}".format(args.config_file))
+    with open(args.config_file, "r") as cf:
+        config_str = "\n" + cf.read()
+        logger.info(config_str)
+    logger.info("Running with config:\n{}".format(cfg))
+
+    model = train(cfg, args)
+
+    if not args.skip_test:
+        logger.info('Start evaluating...')
+        torch.cuda.empty_cache()
 
     print('finish main')
 
