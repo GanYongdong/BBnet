@@ -4,10 +4,12 @@ import os
 import torch
 import torch.distributed as dist
 
+from net.utils import dist_util
 from net.utils.misc import str2bool
 from net.utils.dist_util import synchronize
 from net.config import cfg
 from net.utils.misc import mkdir
+from net.utils.logger import setup_logger
 
 def main():
     print('hello main')
@@ -49,7 +51,11 @@ def main():
     if cfg.OUTPUT_DIR:
         mkdir(cfg.OUTPUT_DIR)
 
-    logger = setup
+    logger = setup_logger("NETt", dist_util.get_rank(), cfg.OUTPUT_DIR)
+    logger.info("using {} GPUs".format(num_gpus))
+    logger.info(args)
+
+    logger.info("Loaded configuration file {}".format(args.config_file))
 
     print('finish main')
 

@@ -1,4 +1,5 @@
 import logging
+import os
 import sys
 
 def setup_logger(name, distributed_rank, save_dir=None):
@@ -11,4 +12,9 @@ def setup_logger(name, distributed_rank, save_dir=None):
     formatter = logging.Formatter("%(asctime)s %(name)s %(levelname)s: %(message)s")
     stream_handler.setFormatter(formatter)
     logger.addHandler(stream_handler)
-    
+    if save_dir:
+        fh = logging.FileHandler(os.path.join(save_dir, 'log.txt'))
+        fh.setLevel(logging.DEBUG)
+        fh.setFormatter(formatter)
+        logger.addHandler(fh)
+    return logger
