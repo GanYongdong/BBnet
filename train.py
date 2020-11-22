@@ -12,9 +12,16 @@ from net.config import cfg
 from net.utils.misc import mkdir
 from net.utils.logger import setup_logger
 
+from net import BBnet
+
 def train(cfg, args):
     logger = logging.getLogger('NET.trainer')
-    model = build_detection_model(cfg)
+    # model = build_detection_model(cfg)
+
+    print("==========> Loading datasets")
+    
+    print("==========> Building model")
+    model = BBnet()
     
     print('train finish')
 
